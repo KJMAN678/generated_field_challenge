@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>本の一覧</h1>
+    <form method="get" action="{% url 'book_list' %}">
+        <label for="start_date">開始日:</label>
+        <input type="date" id="start_date" name="start_date" value="{{ start_date }}">
+        <label for="end_date">終了日:</label>
+        <input type="date" id="end_date" name="end_date" value="{{ end_date }}">
+        <button type="submit">検索</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>著者</th>
+                <th>発売年</th>
+                <th>発売月</th>
+                <th>発売年月日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.selled_year }}</td>
+                    <td>{{ book.selled_month }}</td>
+                    <td>{{ book.selled_date }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">本が見つかりませんでした。</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
